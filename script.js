@@ -13,16 +13,14 @@ let amount2 = prompt('Во сколько это обойдется?');
 
 // Бюджет на месяц budgetmoth = доходы - расходы;
 const getExpensesMonth = function (a, b) {
-  a = Number(a);
-  b = Number(b);
-  return a + b;
+  return Number(a) + Number(b);
 }
 
 let expenses = getExpensesMonth(amount1, amount2);
 console.log('Расходы за месяц равны: ', expenses);
 
 const getAccumulatedMonth = function (a, b) {
-  return a - b;
+  return Number(a) - Number(b);
 }
 
 let accumulatedMonth = getAccumulatedMonth(money, expenses);
@@ -42,18 +40,34 @@ let budgetDay = getBudgetDay (accumulatedMonth, 30);
 console.log('Бюджет на день исходя из месячного накопления равен , ', budgetDay);
 const  getStatusIncome = function (a) {
   if (a >= 1200) {
-    return('У вас высокий уровень дохода');
+    return 'У вас высокий уровень дохода';
   } else if (600 <= a && a < 1200) {
-    return('У вас средний уровень дохода');
+    return 'У вас средний уровень дохода';
   } else if (0 <= a && a < 600) {
-    return('У вас низкий уровень дохода');
+    return 'У вас низкий уровень дохода';
   } else {
-    return('Что-то пошло не так');
+    return 'Что-то пошло не так';
 }
 }
 let statusIncome = getStatusIncome (budgetDay);
 console.log(statusIncome);
 
+const getSmallLetter = function(a) {
+  return 'Слово ' + a.toLowerCase(); 
+}
+
+let word = getSmallLetter('КОСтянЧик');
+console.log(word);
+
+function showTypeOf(a) {
+  return typeof a;
+} 
+console.log(showTypeOf());
+
+function getLenthString(a) {
+  return a.length;
+}
+console.log(getLenthString('Привет бро'));
 
 
 // 1/3 усложненного задания (18.03.23 time 21:00)
