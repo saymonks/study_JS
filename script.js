@@ -1,36 +1,59 @@
 'use strict';
-// lesson03
+
+let isNumber = function(a) {
+  return !isNaN(parseFloat(a)) && isFinite(a);
+};
+
 let mission = 70000;
-let money = prompt('Ваш месячный доход?');
-console.log('Месячный доход равен ', money);
+let money;
+
 let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
 console.log('Возможные расходы: ', addExpenses.split(' '));
 let deposit = confirm('Есть ли у вас депозит в банке?');
-let expenses1 = prompt('Введите обязательную статью расходов:');
-let amount1 = prompt('Во сколько это обойдется?');
-let expenses2 = prompt('Введите обязательную статью расходов:');
-let amount2 = prompt('Во сколько это обойдется?');
 
-// Бюджет на месяц budgetmoth = доходы - расходы;
-const getExpensesMonth = function (a, b) {
-  return Number(a) + Number(b);
-}
+let start = function() {
+  do {
+    money = prompt('Ваш месячный доход?'); 
+  }
+  while (!isNumber(money));
+};
 
-let expenses = getExpensesMonth(amount1, amount2);
-console.log('Расходы за месяц равны: ', expenses);
+start();
+
+let expenses = [];
+let getExpensesMonth = function() {
+  let sumNumbers = 0;
+  for (let i = 0; i < 2; i++) {
+    let number;
+    expenses[i] = prompt('Введите обязательную статью расходов:');
+    while (!isNumber(number)) {
+      number = prompt('Сколько это будет стоить:');  
+    };
+    let newNum = Number(number);
+    sumNumbers = sumNumbers + newNum;
+  };
+  return sumNumbers;
+ };  
+
+let expensesAmount = getExpensesMonth();
+console.log('Расходы за месяц равны: ' + expensesAmount);
 
 const getAccumulatedMonth = function (a, b) {
   return Number(a) - Number(b);
 }
 
-let accumulatedMonth = getAccumulatedMonth(money, expenses);
+let accumulatedMonth = getAccumulatedMonth(money, expensesAmount);
 
 const getTargetMonth = function (a, b) {
-  return Math.ceil(a / b);
-}
+  if ((Math.ceil(a / b)) < 0) {
+    return 'Цель не будет достигнута';
+  } else {
+    return 'В течение этого времени сумма будет накоплена(месяцы) ' + Math.ceil(a / b);
+  }
+};
 
-let targetMonth = getTargetMonth(mission, accumulatedMonth);
-console.log('В течение этого времени сумма будет накоплена(месяцы) ', targetMonth);
+let targetMonth = getTargetMonth(money, accumulatedMonth);
+console.log(targetMonth);
 
 const getBudgetDay = function (a, b) {
   return Math.floor(a / b); 
@@ -51,25 +74,3 @@ const  getStatusIncome = function (a) {
 }
 let statusIncome = getStatusIncome (budgetDay);
 console.log(statusIncome);
-
-const getSmallLetter = function(a) {
-  return 'Слово ' + a.toLowerCase(); 
-}
-
-let word = getSmallLetter('КОСтянЧик');
-console.log(word);
-
-function showTypeOf(a) {
-  return typeof a;
-} 
-console.log(showTypeOf());
-
-function getLenthString(a) {
-  return a.length;
-}
-console.log(getLenthString('Привет бро'));
-
-
-// 1/3 усложненного задания (18.03.23 time 21:00)
-// let namePerson = 'Артем';
-// namePerson === 'Артем' ? console.log('Директор') : namePerson === 'Максим' ? console.log('Преподаватель') : console.log('Студент');
