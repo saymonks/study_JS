@@ -104,8 +104,12 @@ console.log(
   "Бюджет на день исходя из месячного накопления равен , " + appData.budgetDay
 );
 
-// for (let key in appData) {
-//   console.log('Наша прогамма включает в себя данные: ' + key + ' : ' + appData[key]);
-// }
-
-// ВЫВЕДИ ВСЕ КРОМЕ ФУНКЦИИ и ЗАПУШИТЬ В ОТДЕЛЬНЫЙ  УРОК АААА
+for (let key in appData) {
+  if (typeof appData[key] != "function") {
+    console.log(
+      "Наша прогамма включает в себя данные: " + key + " : " + appData[key]
+    );
+  } else {
+    console.log("Данное свойство содержит в себе функцию");
+  }
+}
